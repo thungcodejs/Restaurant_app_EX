@@ -1,93 +1,157 @@
-import React, { useState } from "react";
-import { View, Text, Image, StatusBar } from "react-native";
-import AppIntroSlider from "react-native-app-intro-slider";
-import { COLORS, SIZES } from './src/constants/theme';
+// React Native App Intro Slider using AppIntroSlider
+// https://aboutreact.com/react-native-app-intro-slider/
+// Simple Intro Slider
+
+// import React in our code
+import React, {useState} from 'react';
+
+// import all the components we are going to use
+import {
+    SafeAreaView,
+    StyleSheet,
+    View,
+    Text,
+    Image,
+    Button,
+} from 'react-native';
+
+
+//import AppIntroSlider to use it
+import AppIntroSlider from 'react-native-app-intro-slider';
+
+const App = () => {
+    const [showRealApp, setShowRealApp] = useState(false);
+
+    const onDone = () => {
+        setShowRealApp(true);
+    };
+    const onSkip = () => {
+        setShowRealApp(true);
+    };
+
+    const RenderItem = ({item}) => {
+        return (
+            <View
+                style={{
+                    flex: 1,
+                    width: 395, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: '#5EA33A'
+                }}>
+                <Image
+                    style={styles.introImageStyle}
+                    source={item.image} />
+                <Text style={styles.introTextStyle}>
+                    {item.title}
+                </Text>
+                <Text style={styles.introSubStyle}>{item.subtitle}</Text>
+            </View>
+        );
+    };
+
+    return (
+        <>
+            {showRealApp ? (
+                <SafeAreaView style={styles.container}>
+                    <View style={styles.container}>
+                        <Text style={styles.titleStyle}>
+                            React Native App Intro Slider using AppIntroSlider
+                        </Text>
+                        <Text style={styles.paragraphStyle}>
+                            This will be your screen when you click Skip
+                            from any slide or Done button at last
+                        </Text>
+                        <Button
+                            title="Show Intro Slider again"
+                            onPress={() => setShowRealApp(false)}
+                        />
+                    </View>
+                </SafeAreaView>
+            ) : (
+                <AppIntroSlider
+                    data={slides}
+                    renderItem={RenderItem}
+                    onDone={onDone}
+                    showSkipButton={true}
+                    onSkip={onSkip}
+                />
+            )}
+        </>
+    );
+};
+
+export default App;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        padding: 10,
+        justifyContent: 'center',
+    },
+    titleStyle: {
+        padding: 10,
+        textAlign: 'center',
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    paragraphStyle: {
+        padding: 20,
+        textAlign: 'center',
+        fontSize: 16,
+    },
+    introImageStyle: {
+        width: 100, height: 100, marginBottom: 70
+    },
+    introTextStyle: {
+        color: "white", fontSize: 20, marginBottom: 50
+    },
+    introTitleStyle: {
+        fontSize: 25,
+        color: 'white',
+        textAlign: 'center',
+        marginBottom: 16,
+        fontWeight: 'bold',
+    },
+    introSubStyle: {
+        color: "white", fontSize: 20, width: 350, textAlign: "center"
+    }
+});
 
 const slides = [
-  {
-    id: 1,
-    title: 'Discover Best Places',
-    description: '“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"',
-    image: require('./assets/noun_Binoculars_1107295.png')
-  },
-  {
-    id: 2,
-    title: 'Choose A Tasty Dish',
-    description: '“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"',
-      image: require('./assets/noun_Binoculars_1107295.png')
-  },
-  {
-    id: 3,
-    title: 'Pick Up The Delivery',
-    description: '“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"',
-      image: require('./assets/noun_Binoculars_1107295.png')
-  }
-]
+    {
+        key: 's1',
+        title: "Browse  Food",
+        subtitle: "Welcome to our restaurant app! Log in and check  out our delicious food.",
+        image: require('./assets/image-slider-1.png'),
+        backgroundColor: '#20d2bb',
+    },
+    {
+        key: 's2',
+        title: "Order Food",
+        subtitle: "Hungry? Order food in just a few clicks and we’ll take care of you..",
+        image: require('./assets/image-slider-2.png'),
+        backgroundColor: '#febe29',
+    },
+    {
+        key: 's3',
+        title: "Make Reservations",
+        subtitle: "Book a table in advance to avoid waiting in line",
+        image: require('./assets/image-slider-3.png'),
+        backgroundColor: '#22bcb5',
+    },
+    {
+        key: 's4',
+        title: "Quick  Search",
+        subtitle: "Quickly find food items you like the most",
+        image: require('./assets/image-slider-4.png'),
+        backgroundColor: '#3395ff',
+    },
+    {
+        key: 's5',
+        title: "Apple Pay",
+        subtitle: "We know you’re busy, so you can pay with your phone in just one click",
+        image: require('./assets/image-slider-5.png'),
+        backgroundColor: '#3395ff',
+    }
+];
 
-export default function App() {
-  const [showHomePage, setShowHomePage] = useState(true);
-
-  StatusBar.setBarStyle('light-content', true);
-
-  // const buttonLabel = (label) => {
-  //   return(
-  //       <View style={{
-  //         padding: 12
-  //       }}>
-  //         <Text style={{
-  //           color: COLORS.title,
-  //           fontWeight: '600',
-  //           fontSize: SIZES.h4,
-  //         }}>
-  //           {label}
-  //         </Text>
-  //       </View>
-  //   )
-  // }
-
-  if(!showHomePage) {
-    return(
-        <AppIntroSlider
-            data={slides}
-            renderItem={({item}) => {
-              return(
-                  <View style={{
-                    flex: 1,
-                    alignItems: 'center',
-                    padding: 15,
-                    paddingTop: 100,
-                  }}>
-                    <Image
-                        source={item.image}
-                        style={{
-                          width: SIZES.width - 80,
-                          height: 400,
-                        }}
-                        resizeMode="contain"
-                    />
-                    <Text style={{
-                      fontWeight: 'bold',
-                      color: COLORS.title,
-                      fontSize: SIZES.h1,
-                    }}>
-                      {item.title}
-                    </Text>
-                    <Text style={{
-                      textAlign: 'center',
-                      paddingTop: 5,
-                      color: COLORS.title
-                    }}>
-                      {item.description}
-                    </Text>
-                  </View>
-              )
-            }}
-            activeDotStyle={{
-              backgroundColor: COLORS.primary,
-              width: 30,
-            }}
-        />
-    )
-  }
-
-}
