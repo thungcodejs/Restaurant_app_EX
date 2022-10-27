@@ -34,11 +34,15 @@ const App = () => {
             <View
                 style={{
                     flex: 1,
-                    width: 395, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: '#5EA33A'
+                    width: 395,
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: '#5EA33A'
                 }}>
                 <Image
                     style={styles.introImageStyle}
-                    source={item.image} />
+                    source={item.image}/>
                 <Text style={styles.introTextStyle}>
                     {item.title}
                 </Text>
@@ -100,10 +104,14 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     introImageStyle: {
-        width: 100, height: 100, marginBottom: 70
+        width: 100,
+        height: 100,
+        marginBottom: 70
     },
     introTextStyle: {
-        color: "white", fontSize: 20, marginBottom: 50
+        color: "white",
+        fontSize: 20,
+        marginBottom: 50
     },
     introTitleStyle: {
         fontSize: 25,
@@ -113,7 +121,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     introSubStyle: {
-        color: "white", fontSize: 20, width: 350, textAlign: "center"
+        color: "white",
+        fontSize: 20,
+        width: 350,
+        textAlign: "center"
     }
 });
 
